@@ -1567,8 +1567,9 @@ class PixelFlasher(wx.Frame):
         about_item.SetBitmap(images.about_24.GetBitmap())
         self.Bind(wx.EVT_MENU, self._on_help_about, about_item)
 
-        # Add the File menu to the menu bar
-        self.menuBar.Append(file_menu, "&File")
+        # Add the File menu to the menu bar only if it is not MacOS, because both Settings and Exit are in the app menu on MacOS
+        if platform.system() != 'Darwin':
+            self.menuBar.Append(file_menu, "&File")
         # Add the Device menu to the menu bar
         self.menuBar.Append(device_menu, "&Device")
         # Add the Tools menu to the menu bar

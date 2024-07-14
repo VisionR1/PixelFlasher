@@ -98,7 +98,7 @@ jobs:
         uses: skymatic/code-sign-action@v1
         with:
           certificate: '${{ secrets.CERTIFICATE }}'
-          password: '${{ secrets.PASSWORD }}'
+          password: '${{ secrets.CERT_PASSWORD }}'
           certificatesha1: '${{ secrets.CERTHASH }}'
           certificatename: '${{ secrets.CERTNAME }}'
           description: 'PixelFlasher'
@@ -106,7 +106,10 @@ jobs:
           folder: 'dist'
           recursive: false
 
-        # Upload artifacts Windows to Actions
+      - name: List contents of dist directory again
+        run: ls dist
+
+          # Upload artifacts Windows to Actions
       - name: Upload Windows Artifact
         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }} # Only run this step when running in GitHub Actions
         uses: actions/upload-artifact@v4
